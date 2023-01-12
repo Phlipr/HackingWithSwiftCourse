@@ -33,6 +33,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         updateChangeFilterButtonTitle(to: "CISepiaTone")
         
+        imageView.alpha = 0
+        
         disableSliders()
     }
     
@@ -142,6 +144,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             if let cgimg = context.createCGImage(currentFilter.outputImage!, from: currentFilter.outputImage!.extent) {
                 let processedImage = UIImage(cgImage: cgimg)
                 self.imageView.image = processedImage
+                if self.imageView.alpha != 1 {
+                    UIView.animate(withDuration: 2, delay: 0, options: [],
+                               animations: {
+                        self.imageView.alpha = 1
+                    }, completion: nil)
+                }
             }
     }
     
